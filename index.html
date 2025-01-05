@@ -14,25 +14,36 @@
             font-family: 'Cairo', sans-serif;
         }
 
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --accent: #00FF00; /* الأزرق الأخضر المشع */
+            --border: #404040;
+            --highlight: #2c3e50;
+        }
+
         body {
-            background: #f5f5f5;
-            color: #333;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: var(--bg-secondary);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: var(--accent);
             margin-bottom: 30px;
             font-size: 2.5em;
         }
@@ -40,21 +51,50 @@
         .section {
             margin-bottom: 40px;
             padding: 20px;
-            background: #f8f9fa;
+            background: var(--bg-primary);
             border-radius: 10px;
-            border-right: 5px solid #3498db;
+            border-right: 5px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateX(-5px);
         }
 
         .position {
             font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
+            color: var(--accent);
+            margin-bottom: 15px;
             font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .requirements {
             margin-right: 20px;
-            color: #555;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .requirements ul {
+            list-style-type: none;
+            margin-right: 20px;
+        }
+
+        .requirements li {
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .requirements li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            margin-left: 10px;
         }
 
         .progression-path {
@@ -62,47 +102,66 @@
             align-items: center;
             margin: 15px 0;
             flex-wrap: wrap;
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 8px;
         }
 
         .arrow {
             margin: 0 10px;
-            color: #3498db;
+            color: var(--accent);
             font-weight: bold;
         }
 
         .note {
-            background: #fff3cd;
+            background: #2c3e50;
             padding: 15px;
             border-radius: 8px;
             margin-top: 20px;
-            border-right: 5px solid #ffc107;
+            border-right: 5px solid var(--accent);
         }
 
         .note-title {
-            color: #856404;
+            color: var(--accent);
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .divider {
             border: none;
-            border-top: 2px dashed #e9ecef;
+            border-top: 2px dashed var(--border);
             margin: 30px 0;
         }
 
         .special-position {
-            background: #e8f4f8;
+            background: #2c3e50;
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
             border-right: 5px solid #17a2b8;
         }
 
-        .logo {
+        .download-btn {
             display: block;
-            margin: 30px auto;
-            max-width: 200px;
-            height: auto;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .highlighted {
+            background: #3498db33;
+            border-radius: 4px;
         }
 
         @media (max-width: 768px) {
@@ -117,6 +176,16 @@
             h1 {
                 font-size: 1.8em;
             }
+
+            .progression-path {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .arrow {
+                margin: 10px 0;
+                transform: rotate(90deg);
+            }
         }
     </style>
 </head>
@@ -124,119 +193,182 @@
     <div class="container">
         <h1>نظام الترقيات</h1>
 
+        <!-- مدير العمليات التنفيذية -->
         <div class="section">
-            <div class="position">مدير العمليات التنفيذية</div>
-            <div class="requirements">123 تقرير + رئيس قسم السحب/رئيس قسم الصيانة و التعديل سابقا + ترشيح</div>
-            
-            <div class="position">رئيس قسم السحب</div>
-            <div class="requirements">84 تقرير + اكثر من 12 يوم في القطاع + ترشيح</div>
-            
-            <div class="position">رئيس قسم الصيانة و التعديل</div>
-            <div class="requirements">90 تقرير + اكثر من 14 يوم في القطاع + ترشيح</div>
-        </div>
-
-        <div class="section">
-            <div class="progression-path">
-                <span>ضابط سحب تحت التدريب</span>
-                <span class="arrow">></span>
-                <span>ضابط سحب</span>
-                <div class="requirements">15 تقرير + اكثر من يوم في القطاع</div>
+            <div class="position">مدير العمليات التنفيذية
+                <span class="requirements">المتطلبات الأساسية:</span>
             </div>
-            
-            <div class="progression-path">
-                <span>ضابط سحب</span>
-                <span class="arrow">></span>
-                <span>ضابط سحب رئيسي</span>
-                <div class="requirements">30 تقرير + اكثر من 3 ايام في القطاع</div>
-            </div>
-            
-            <div class="progression-path">
-                <span>ضابط سحب رئيسي</span>
-                <span class="arrow">></span>
-                <span>ضابط سحب خبير</span>
-                <div class="requirements">45 تقرير + اكثر من 6 ايام في القطاع</div>
-            </div>
-            
-            <div class="progression-path">
-                <span>ضابط سحب خبير</span>
-                <span class="arrow">></span>
-                <span>معتمد</span>
-                <div class="requirements">67 تقرير + اكثر من 9 ايام في القطاع</div>
+            <div class="requirements">
+                <ul>
+                    <li>123 تقرير</li>
+                    <li>منصب سابق: رئيس قسم السحب أو رئيس قسم الصيانة والتعديل</li>
+                    <li>ترشيح من الإدارة العليا</li>
+                </ul>
             </div>
         </div>
 
+        <!-- رئيس قسم السحب -->
         <div class="section">
-            <div class="progression-path">
-                <span>فني صيانة تحت التدريب</span>
-                <span class="arrow">></span>
-                <span>فني صيانة</span>
-                <div class="requirements">20 تقرير + اكثر من يوم في القطاع</div>
+            <div class="position">رئيس قسم السحب
+                <span class="requirements">المتطلبات الأساسية:</span>
             </div>
-            
-            <div class="progression-path">
-                <span>فني صيانة</span>
-                <span class="arrow">></span>
-                <span>فني صيانة رئيسي</span>
-                <div class="requirements">35 تقرير + اكثر من 3 ايام في القطاع</div>
-            </div>
-            
-            <div class="progression-path">
-                <span>فني صيانة رئيسي</span>
-                <span class="arrow">></span>
-                <span>فني صيانة خبير</span>
-                <div class="requirements">50 تقرير + اكثر من 6 ايام في القطاع</div>
-            </div>
-            
-            <div class="progression-path">
-                <span>فني صيانة خبير</span>
-                <span class="arrow">></span>
-                <span>فني صيانة معتمد</span>
-                <div class="requirements">71 تقرير + اكثر من 9 ايام في القطاع</div>
+            <div class="requirements">
+                <ul>
+                    <li>84 تقرير</li>
+                    <li>أكثر من 12 يوم في القطاع</li>
+                    <li>ترشيح</li>
+                </ul>
             </div>
         </div>
 
+        <!-- رئيس قسم الصيانة والتعديل -->
         <div class="section">
-            <div class="progression-path">
-                <span>فني تعديل تحت التدريب</span>
-                <span class="arrow">></span>
-                <span>فني تعديل</span>
-                <div class="requirements">20 تقرير + اكثر من يوم في القطاع</div>
+            <div class="position">رئيس قسم الصيانة والتعديل
+                <span class="requirements">المتطلبات الأساسية:</span>
             </div>
-            
-            <div class="progression-path">
-                <span>فني تعديل</span>
-                <span class="arrow">></span>
-                <span>فني تعديل رئيسي</span>
-                <div class="requirements">35 تقرير + اكثر من 3 ايام في القطاع</div>
-            </div>
-            
-            <div class="progression-path">
-                <span>فني تعديل رئيسي</span>
-                <span class="arrow">></span>
-                <span>فني تعديل خبير</span>
-                <div class="requirements">50 تقرير + اكثر من 6 ايام في القطاع</div>
-            </div>
-            
-            <div class="progression-path">
-                <span>فني تعديل خبير</span>
-                <span class="arrow">></span>
-                <span>فني تعديل معتمد</span>
-                <div class="requirements">71 تقرير + اكثر من 9 ايام في القطاع</div>
+            <div class="requirements">
+                <ul>
+                    <li>90 تقرير</li>
+                    <li>أكثر من 14 يوم في القطاع</li>
+                    <li>ترشيح</li>
+                </ul>
             </div>
         </div>
 
-        <hr class="divider">
+        <!-- ضابط سحب -->
+        <div class="section">
+            <div class="position">ضابط سحب تحت التدريب > ضابط سحب
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>15 تقرير</li>
+                    <li>أكثر من يوم في القطاع</li>
+                </ul>
+            </div>
+        </div>
 
+        <!-- ضابط سحب رئيسي -->
+        <div class="section">
+            <div class="position">ضابط سحب > ضابط سحب رئيسي
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>30 تقرير</li>
+                    <li>أكثر من 3 أيام في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ضابط سحب خبير -->
+        <div class="section">
+            <div class="position">ضابط سحب رئيسي > ضابط سحب خبير
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>45 تقرير</li>
+                    <li>أكثر من 6 أيام في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ضابط سحب معتمد -->
+        <div class="section">
+            <div class="position">ضابط سحب خبير > ضابط سحب معتمد
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>67 تقرير</li>
+                    <li>أكثر من 9 أيام في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- فني صيانة -->
+        <div class="section">
+            <div class="position">فني صيانة تحت التدريب > فني صيانة
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>20 تقرير</li>
+                    <li>أكثر من يوم في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- فني صيانة رئيسي -->
+        <div class="section">
+            <div class="position">فني صيانة > فني صيانة رئيسي
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>35 تقرير</li>
+                    <li>أكثر من 3 أيام في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- فني صيانة خبير -->
+        <div class="section">
+            <div class="position">فني صيانة رئيسي > فني صيانة خبير
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>50 تقرير</li>
+                    <li>أكثر من 6 أيام في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- فني صيانة معتمد -->
+        <div class="section">
+            <div class="position">فني صيانة خبير > فني صيانة معتمد
+                <span class="requirements">المتطلبات الأساسية:</span>
+            </div>
+            <div class="requirements">
+                <ul>
+                    <li>71 تقرير</li>
+                    <li>أكثر من 9 أيام في القطاع</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ملاحظات -->
+        <div class="note">
+            <div class="note-title">ملاحظات هامة:</div>
+            <div>• يتم تصفير عدد التقارير بعد كل ترقية</div>
+            <div>• للانتقال بين الأقسام، يجب التواصل مع المسؤول المباشر</div>
+            <div>• يتم مراجعة الترقيات بشكل دوري كل أسبوع</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- فني متنقل -->
         <div class="special-position">
             <div class="position">فني متنقل</div>
-            <div class="requirements">يتم اعطائه الرتبة بشكل مباشر عند التوضيف في حال الحاجة او نقل احد الفنيين من قسمه السابق الى هذه الرتبة</div>
+            <div>يتم إعطاؤه الرتبة بشكل مباشر عند التوظيف في حال الحاجة أو نقل أحد الفنيين من قسمه السابق إلى هذه الرتبة</div>
         </div>
 
-        <div class="note">
-            <div class="note-title">ملاحظات:</div>
-            <div>- يتم تصفير عدد التقارير في كل ترقية لك</div>
-            <div>- ان كنت تريد ان يتم نقلك من قسم الى قسم يجب عليك التواصل مع المسؤول المباشر لك و هو سيتكلف بباقي الاجرائات</div>
-        </div>
+        <button id="downloadBtn" class="download-btn">تحميل كصورة</button>
     </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        // وظيفة التحميل
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            html2canvas(document.querySelector(".container")).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'نظام_الترقيات.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+    </script>
 </body>
 </html>
