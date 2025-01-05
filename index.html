@@ -238,18 +238,5 @@
             <div>- ان كنت تريد ان يتم نقلك من قسم الى قسم يجب عليك التواصل مع المسؤول المباشر لك و هو سيتكلف بباقي الاجرائات</div>
         </div>
     </div>
-    <button id="downloadBtn" class="download-btn">تحميل كصورة</button>
-
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script>
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            html2canvas(document.querySelector(".container")).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'نظام_الترقيات.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
-        });
-    </script>
 </body>
 </html>
